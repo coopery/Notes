@@ -2,15 +2,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.coopery.notes.NoteActivity">
 
-    <item android:id="@+id/action_save"
-        android:title="Save"
-        android:icon="@drawable/ic_action_save"
-        android:orderInCategory="1"
-        android:showAsAction="ifRoom" />
+    <!--<item android:id="@+id/action_save"-->
+        <!--android:title="Save"-->
+        <!--android:icon="@drawable/ic_action_save"-->
+        <!--android:orderInCategory="1"-->
+        <!--android:showAsAction="ifRoom" />-->
+
+	<item android:id="@+id/action_delete"
+		android:title="Delete"
+		android:icon="@drawable/ic_action_discard"
+		android:orderInCategory="2"
+		android:showAsAction="ifRoom" />
 
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
-        android:orderInCategory="2"
+        android:orderInCategory="100"
         android:showAsAction="never" />
 
 </menu>

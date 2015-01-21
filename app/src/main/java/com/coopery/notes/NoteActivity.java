@@ -3,7 +3,6 @@ package com.coopery.notes;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,7 +26,7 @@ import java.util.Calendar;
 
 public class NoteActivity extends Activity {
 
-	Typeface customFont;
+//	Typeface customFont;
 
 	EditText etTitle;
 	EditText etNote;
@@ -40,7 +39,7 @@ public class NoteActivity extends Activity {
 		setContentView(R.layout.activity_note);
 
 		String fileName = getIntent().getStringExtra(MainActivity.EXTRA_TITLE);
-		oldTitle = fileName.substring(14);
+		oldTitle = fileName;
 
 		etTitle = (EditText) findViewById(R.id.etTitle);
 		etNote = (EditText) findViewById(R.id.etNote);
@@ -54,7 +53,6 @@ public class NoteActivity extends Activity {
 		final StringBuffer storedString = new StringBuffer();
 
 		File file = new File(getFilesDir().getAbsolutePath() + '/' + fileName);
-		//etNote.setText(file.getAbsolutePath());
 
 		// Try to read the file:
 		if(file.exists()) {
@@ -66,7 +64,6 @@ public class NoteActivity extends Activity {
 				String line;
 
 				while((line = br.readLine()) != null) {
-					//Toast.makeText(NoteActivity.this, line, Toast.LENGTH_SHORT).show();
 					sb.append(line);
 					sb.append("\n");
 				}
@@ -83,7 +80,6 @@ public class NoteActivity extends Activity {
 		etNote.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
 			}
 
 			@Override
@@ -115,33 +111,55 @@ public class NoteActivity extends Activity {
 		switch(item.getItemId()) {
 			case R.id.action_settings:
 				return true;
-			case R.id.action_save:
-				actionSave();
+//			case R.id.action_save:		Remove Save button?
+//				actionSave();
+//				return true;
+			case R.id.action_delete:
+				actionDelete();
 				return true;
 		}
 
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void actionSave() {
-		if(save()) {
-			Toast.makeText(NoteActivity.this, "Saved!", Toast.LENGTH_SHORT).show();
+	private void actionDelete() {
+		if(delete()) {
+			Toast.makeText(this, "Deleted successfully", Toast.LENGTH_SHORT).show();
 
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
 		}
 		else {
-			Toast.makeText(NoteActivity.this, "Uh oh. Didn't save...", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "Couldn't delete...", Toast.LENGTH_SHORT).show();
 		}
 	}
 
+	private boolean delete() {
+		File thisFile = new File(getFilesDir(), oldTitle);
+
+		return thisFile.delete();
+	}
+
+//	private void actionSave() {
+//		if(save()) {
+//			Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
+//
+//			Intent intent = new Intent(this, MainActivity.class);
+//			startActivity(intent);
+//		}
+//		else {
+//			Toast.makeText(NoteActivity.this, "Couldn't save...", Toast.LENGTH_SHORT).show();
+//		}
+//	}
+//
 	private boolean save() {
 		String noteName = etTitle.getText().toString();
 
 		// Delete the former file, if there is one
 		String files[] = getFilesDir().list();
 		for(String file : files) {
-			if(file.substring(14).equals(noteName) || file.substring(14).equals(oldTitle)) {
+			// Might just need the second part of this v v v v v v?
+			if(file.substring(14).equals(noteName) || file.equals(oldTitle)) {
 				this.deleteFile(file);
 			}
 		}
