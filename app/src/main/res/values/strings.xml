@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Notes</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_note">NoteActivity</string>
+
+    <color name="legal">#FAF2AD</color>
+    <color name="saffron">#f4d03f</color>
+    <color name="saffronDark">#f4a33f</color>
+	<color name="actionbar_text">#000000</color>
+	<color name="actionbar_text_light">#FFFFFF</color>
+
+</resources>
