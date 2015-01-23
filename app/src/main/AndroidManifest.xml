@@ -20,7 +20,7 @@
         </activity>
         <activity
             android:name=".NoteActivity"
-            android:label="Note"
+            android:label=""
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="adjustResize|stateHidden">
             <meta-data
